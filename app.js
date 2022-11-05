@@ -1,11 +1,17 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
-app.use((req,res,next) => { //this function will be executed for every incoming request
-	console.log('in the middleware');
-  next();
+
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+
+app.use(bodyParser.urlencoded()); //parse the incoming request body
+
+app.use('/admin',adminRoutes);
+app.use(shopRoutes);
+
+app.use((req,res,next) => { 
+  res.status(404).send('<h1>Page not found</h1>');
 }); 
-app.use((req,res,next) => { //this function will be executed for every incoming request
-	console.log('in another middleware');
-  res.send('<h1>Oi</h1>');
-}); 
+
 app.listen(3000);
