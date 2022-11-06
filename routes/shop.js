@@ -3,12 +3,11 @@ const express = require('express');
 const rootDir = require('../util/path');
 const router = express.Router();
 
-router.get('/home',(req,res,next) => {
-  //res.sendFile(path.join(__dirname,'..','views','shop.html'));
+const adminData = require('./admin');
+
+router.get('/',(req,res,next) => {
+  console.log(adminData.products); //this data is shared with every user and every request
   res.sendFile(path.join(rootDir,'views','shop.html'));
-}); 
-router.get('/',(req,res,next) => { 
-  res.redirect('/home');
 }); 
 
 module.exports = router;
