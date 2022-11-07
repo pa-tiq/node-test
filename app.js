@@ -2,7 +2,13 @@ const path = require ('path');
 const express = require('express');
 const rootDir = require('./util/path');
 const bodyParser = require('body-parser');
+const hbs = require('express-handlebars');
+
 const app = express();
+
+app.engine('hbs',hbs.engine());
+app.set("view engine", "hbs"); //define your templating engine here
+app.set("views", "views");
 
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
